@@ -1,0 +1,97 @@
+@charset "EUC-KR";
+
+.edu_intro_title,
+.edu_intro_doing {
+  width: 1190px;
+  margin: auto;
+  border-bottom: 2px solid rgb(29, 48, 131);
+  font-size: xx-large;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.edu_intro_name {
+  font-size: xx-large;
+}
+.edu_intro_left {
+  display: flex;
+  align-items: flex-end;
+}
+.edu_intro_capt {
+  font-size: medium;
+  padding-left: 10px;
+}
+.edu_intro_pt {
+  width: 1190px;
+  margin: auto;
+  margin-top: 30px;
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.edu_intro_detail {
+  width: 1190px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+.detail_title {
+  font-size: medium;
+  font-weight: 700;
+  font-size: x-large;
+  margin-bottom: 20px;
+}
+.detail_body {
+  border: 2px solid #0f0f70;
+  border-radius: 10px;
+  padding: 5px;
+}
+.fas {
+  font-size: large;
+}
+.back {
+  position: absolute;
+  right: 250px;
+  top: 170px;
+}
+.i {
+  font-size: 20px;
+  margin-bottom: 12px;
+  padding-top: 0;
+}
+@media (max-width: 900px) {
+  .sub_title {
+    font-size: small;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .edu_intro_name {
+    font-size: xx-large;
+  }
+  .span {
+    font-size: xx-large;
+  }
+  .edu_intro_pt {
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
+    font-size: medium;
+  }
+  .edu_intro_detail {
+    width: 100%;
+    margin: auto;
+  }
+  .detail_title {
+    font-size: medium;
+    margin: 10px 0;
+  }
+  .snu_mobile_main_box {
+    margin-bottom: 50px;
+  }
+  .i {
+    font-size: 13px;
+    margin-bottom: 12px;
+    padding-top: 0;
+  }
+}

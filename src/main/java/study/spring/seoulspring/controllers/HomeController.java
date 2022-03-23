@@ -45,24 +45,29 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/busin")
+	public String busin() {
+		return "busin";
+	}
+	
 	@RequestMapping(value="/pdf.do", method=RequestMethod.GET)
 	public String pdf(Model model){
 		
 		List<String> list = new ArrayList<String>();
 		list.add("Java");
-		list.add("파이썬");
+		list.add("�뙆�씠�뜫");
 		list.add("R");
 		list.add("C++");
-		list.add("자바스크립트");
+		list.add("�옄諛붿뒪�겕由쏀듃");
 		list.add("Ruby");
-		list.add("스칼라");
-		list.add("클로져");
-		list.add("자바");
+		list.add("�뒪移쇰씪");
+		list.add("�겢濡쒖졇");
+		list.add("�옄諛�");
 		
-		//뷰에게 전달할 데이터 저장
+		//酉곗뿉寃� �쟾�떖�븷 �뜲�씠�꽣 ���옣
 		model.addAttribute("list",list);
 		
-		//출력할 뷰 이름 리턴
+		//異쒕젰�븷 酉� �씠由� 由ы꽩
 		return "pdf";
 	}
 

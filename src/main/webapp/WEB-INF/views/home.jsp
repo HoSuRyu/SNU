@@ -82,6 +82,19 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="notice">
+                <div class="notice_header">
+                    <div class="notice_header_title">공지사항</div>
+                    <div class="notice_header_more">더보기<i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="notice_body">
+                    <div class="notice_body_text">1번공지사항</div>
+                    <div class="notice_body_text">2번공지사항</div>
+                    <div class="notice_body_text">3번공지사항</div>
+                    <div class="notice_body_text">4번공지사항</div>
+                </div>
+            </div>
         </div>
         
         

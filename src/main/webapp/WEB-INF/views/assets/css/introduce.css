@@ -94,7 +94,7 @@
   padding: 10px 0 10px 0;
   margin-top:20px;
 }
-.small_box > div {
+.small_box > a {
   border: 4px solid #34346b;
   width: 17%;
   height: 100px;
@@ -107,13 +107,13 @@
   font-size: large;
   font-weight:bold;
 }
-.small_box > div:hover {
+.small_box > a:hover {
   background-color: #0f0f70;
   color: aliceblue;
   transition: all 0.5s;
 }
 
-.small_box > div > a:hover{
+.small_box > a> :hover{
 	color:white;
 	transition: all 0.5s;
 }

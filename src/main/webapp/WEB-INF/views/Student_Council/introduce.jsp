@@ -51,7 +51,7 @@
             <div class="cons_intro">
                 <div class="snu_main_header">
                     <span>학생회 소개</span>
-                    <img src="${pageContext.request.contextPath}/assets/img/snu_logo.png"/>
+                    <img src="${pageContext.request.contextPath}/assets/img/snu_logo.jpg"/>
                 
                 </div>
                 <div class="cons_intro_pt">
@@ -74,7 +74,7 @@
                     <span>41대 학생회 늘품</span>
                 </div>
                 <div class="sunbon_explain">
-                    <div class="sunbon_explain_photo"><img src="${pageContext.request.contextPath}/assets/img/snu_logo.jpg"></div>
+                    <div class="sunbon_explain_photo"><img src="${pageContext.request.contextPath}/assets/img/ne.png"></div>
                     <div class="sunbon_explain_text">
                         <div class="sunbon_explain_text1"><i class="fas fa-circle"></i> 학생회 소개</div>
                         <div class="sunbon_explain_text2">‘늘’은 ‘계속하여 언제나’라는 의미입니다. 제41대 사범대 학생회 ‘늘품’은 늘 사범대 학우들의 곁에 머물며 안정적인 지지대의 역할을 하겠습니다. 언제나 학우들의 목소리에 귀 기울이며, 계속되는 학생회를 만들고자 하는 저희의 비전이 ‘늘’에 담겨있습니다.
@@ -128,7 +128,7 @@
 
              <div class="sunbon_intro">
                 <div class="sunbon_explain">
-                    <div class="sunbon_explain_photo"><img src="${pageContext.request.contextPath}/assets/img/snu_logo.jpg"></div>
+                    <div class="sunbon_explain_photo"><img src="${pageContext.request.contextPath}/assets/img/ne.png"></div>
                 
                 </div>
                 <div class="sunbon_explain_text">

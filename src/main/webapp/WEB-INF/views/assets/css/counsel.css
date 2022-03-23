@@ -120,7 +120,6 @@
 
   .sunbon_explain {
     width: 100%;
-    margin-top: 30px;
   }
 
   .sunbon_explain_photo {
@@ -130,7 +129,7 @@
   }
 
   .sunbon_explain_photo > img {
-    height: 200px;
+    padding: 0px;
   }
 
   .sunbon_explain_text {
@@ -147,5 +146,8 @@
   .sunbon_explain_text2 {
     font-size: small;
     margin-bottom: 50px;
+  }
+  .sunbon_explain {
+    margin: 0;
   }
 }

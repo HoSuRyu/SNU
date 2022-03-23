@@ -23,11 +23,12 @@
 .faq_add_btn {
   font-size: small;
   font-weight: 600;
-  margin: 10px 10px 0 0;
+  margin: 10px 0 0 0;
   border: 2px;
-  background-color: rgb(192, 197, 212);
+  background-color: #001153;
   border-radius: 5px;
-  padding: 3px;
+  padding: 4px;
+  color: white;
 }
 .faq_body {
   width: 1190px;
@@ -43,7 +44,7 @@
 }
 .faq_body:hover {
   transition: all 0.2s;
-  background-color: rgb(150, 157, 216);
+  background-color: rgb(196, 196, 202);
 }
 
 @media (max-width: 900px) {
@@ -85,10 +86,15 @@
   .faq_add_btn {
     font-size: small;
     font-weight: 500;
-    margin: 10px 10px 0 0;
+    margin: 10px 0 0 0;
     border: 2px;
-    background-color: rgb(192, 197, 212);
+    background-color: #001153;
+    color: white;
     border-radius: 5px;
-    padding: 3px;
+    padding: 4px;
+  }
+  .faq_body:hover {
+    transition: all 0.2s;
+    background-color: rgb(196, 196, 202);
   }
 }

@@ -62,11 +62,11 @@
                 <div class="cons_intro_name">국별 배너</div>
             </div>
             <div class="small_box">
-                <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=1">교육국</a></div>
-                <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=2">문화국</a></div>
-                <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=3">사무국</a></div>
-                <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=4">소통기획국</a></div>
-                <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=5">인권사회국</a></div>
+                <a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=1">교육국</a>
+                <a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=2">문화국</a>
+                <a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=3">사무국</a>
+                <a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=4">소통기획국</a>
+                <a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=5">인권사회국</a>
             </div>
 
         </div>
