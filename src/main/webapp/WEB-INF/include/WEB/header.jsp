@@ -29,7 +29,7 @@
                     <div class="snu_tab_menu_inner_box"><a href="#">회의록 / 안건지</a></div>
                     <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/Student_Council/rule.do">학생회칙 / 세칙</a></div>
                     <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/introduce/introduce.do">집행위원회 소개</a></div>
-                    <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/introduce/introduce.do">주요사업소개</a></div>
+                    <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/busin">주요사업소개</a></div>
                 </div>
             </div>
 
