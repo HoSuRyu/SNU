@@ -12,8 +12,8 @@
                         <div><a href="${pageContext.request.contextPath}/Student_Council/introduce.do">학생회 소개</a></div>
                         <div><a href="#">회의록 / 안건지</a></div>
                          <div><a href="${pageContext.request.contextPath}/Student_Council/rule.do">학생회칙 / 세칙</a></div>
-                        <div><a href="#">집행위원회 소개</a></div>
-                        <div><a href="#">주요사업소개</a></div>
+                        <div><a href="${pageContext.request.contextPath}/introduce/introduce.do">집행위원회 소개</a></div>
+                        <div><a href="${pageContext.request.contextPath}/introduce/business_introduce.do?cnum=1">주요사업소개</a></div>
                     </div>
                 </div>
                 <div class="tab_inner_box">
@@ -40,7 +40,7 @@
 
                 <div class="tab_inner_box">
                     <div class="btn" id="tab_btn2">
-                        <div>행사 참여신청</div>
+                        <div><a href="${pageContext.request.contextPath}/festive/festive.do">행사 참여신청</a></div>
                     </div>
                 </div>
 

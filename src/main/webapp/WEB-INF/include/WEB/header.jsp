@@ -28,7 +28,7 @@
                     <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/Student_Council/introduce.do">학생회 소개</a></div>
                     <div class="snu_tab_menu_inner_box"><a href="#">회의록 / 안건지</a></div>
                     <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/Student_Council/rule.do">학생회칙 / 세칙</a></div>
-                    <div class="snu_tab_menu_inner_box"><a href="#">집행위원회 소개</a></div>
+                    <div class="snu_tab_menu_inner_box"><a href="${pageContext.request.contextPath}/introduce/introduce.do">집행위원회 소개</a></div>
                     <div class="snu_tab_menu_inner_box"><a href="#">주요사업소개</a></div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="snu_tab_menu">
-                <div class="snu_tab_btn"><a href="#">행사 참여신청</a></div>
+                <div class="snu_tab_btn"><a href="${pageContext.request.contextPath}/festive/festive.do">행사 참여신청</a></div>
 
             </div>
 

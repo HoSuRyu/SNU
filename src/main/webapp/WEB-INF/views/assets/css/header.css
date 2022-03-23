@@ -1,164 +1,136 @@
 body {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
+.asd {
+  background-color: #69a0e0;
+}
 .main_box {
-    width: 100%;
+  min-width: 1190px;
 }
 
 .header_box {
-
-    width: 100%;
-    background-color: #0f0f70;
+  width: 100%;
+  background-color: #0f0f70;
 }
 .main_box_header {
-    padding: 5px 0px;
-    width: 1190px;
-    margin: auto;
+  padding: 5px 0px;
+  width: 1190px;
+  margin: auto;
 }
 .main_box_header,
 .header_left_box,
 .header_right_box {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.header_left_bar {
 
-    border-right: 2px solid white;
-    height: 15px;
-    width: 10px;
-    margin-right: 10px;
+.header_left_bar {
+  border-right: 2px solid white;
+  height: 15px;
+  width: 10px;
+  margin-right: 10px;
 }
 
 .header_left_box_inner {
-
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .header_logo_box {
-
-    width: 40px;
-    height: 40px;
-    margin: 0px 2px;
+  width: 40px;
+  height: 40px;
+  margin: 0px 2px;
 }
 
-
-
-
+#asd {
+  background-color: white;
+  border-radius: 5px;
+  width: 23px;
+  height: 23px;
+}
 .header_login_box {
-
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
 }
-
-
-
 
 .header_logo_box img {
-
-    width: 100%;
+  width: 100%;
 }
 
 .snu_tab_box {
-
-    margin: auto;
-    width: 1190px;
-    text-align: center;
-    position: relative;
-
+  margin: auto;
+  width: 1190px;
+  text-align: center;
+  position: relative;
 }
 
 .snu_tab_menu {
-
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    padding: 20px 40px;
-    font-size: 20px;
-
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 20px 40px;
+  font-size: 20px;
 }
 
 .snu_tab_search_btn {
-
-    font-size: 25px;
-    display: inline-block;
-
+  font-size: 25px;
+  display: inline-block;
 }
 
 .snu_content_box {
-
-    height: 1070px;
-    width: 100%;
-
+  height: 1070px;
+  width: 100%;
 }
-.header{
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .snu_tab_menu_content {
-
-    position: absolute;
-    left: 0px;
-    top: 66px;
-    font-size: 14px;
-    border-top: 2px solid #69A0E0;
-    width: 100%;
-    box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 20%);
-    z-index: 1000;
-
+  position: absolute;
+  left: 0px;
+  top: 66px;
+  font-size: 14px;
+  border-top: 2px solid #69a0e0;
+  width: 100%;
+  box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 20%);
+  z-index: 1000;
 }
 
 a {
-
-    text-decoration: none;
-    color: black;
-
+  text-decoration: none;
+  color: black;
 }
 
 .snu_tab_menu_inner_box {
-
-    padding: 12px 0px;
-    border-top: none;
-    background-color: white;
-
+  padding: 12px 0px;
+  border-top: none;
+  background-color: white;
 }
 
 .snu_tab_menu_inner_box:hover {
-
-    background-color: rgb(224, 224, 220);
-    color: #0f0f70;
-    cursor: pointer;
-    /*transition: all 0.5s ease-in-out;*/
-
+  background-color: rgb(224, 224, 220);
+  color: #0f0f70;
+  cursor: pointer;
+  /*transition: all 0.5s ease-in-out;*/
 }
-
 
 .snu_tab_menu_inner_box:hover a {
-
-    color: #0f0f70;
-    font-weight: bold;
-
+  color: #0f0f70;
+  font-weight: bold;
 }
 
-
-
-
 .hidden {
-    display: none;
+  display: none;
 }
 
 .snu_tab_btn a {
-    color: grey
+  color: grey;
 }
 
 .snu_tab_menu:hover .snu_tab_btn a {
-
-    color: #0f0f70;
-
+  color: #0f0f70;
 }

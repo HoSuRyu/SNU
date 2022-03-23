@@ -108,6 +108,17 @@
 	position: relative;
 	top: -2px;
 }
+
+#protected_qna_content {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+#protected_qna_content i {
+	color: grey;
+	position: relative;
+	left: 5px;
+	top: -1px;
+}
 </style>
 
 </head>
@@ -124,11 +135,10 @@
 			<div class="snu_main_content">
 
 				<div class="snu_main_header">
-					<span>건의 및 Q&A</span> <img src="${pageContext.request.contextPath}/assets/img/snu_logo.png" />
+					<span>건의 및 Q&A</span> <img
+						src="${pageContext.request.contextPath}/assets/img/snu_logo.png" />
 				</div>
-
 				<div class="snu_qna_box">
-
 					<div class="snu_qna_content" id="snu_qna_header">
 						<div style="width: 8%;">카테고리</div>
 						<div style="width: 44%;">제목</div>
@@ -138,39 +148,69 @@
 						<div style="width: 16%;">게시일</div>
 						<div style="width: 16%;">조회수</div>
 					</div>
-					<div class="snu_qna_content">
-						<div style="width: 8%;">질문</div>
-						<div style="width: 44%; text-align: left;">류호수 입니다. 안녕하세요</div>
 
-						<div style="width: 16%;">류호수</div>
+					<c:forEach var="item" items="${output}" varStatus="status">
+						<c:set var="postcategory" value="${item.postcategory}" />
+						<c:set var="posttitle" value="${item.posttitle}" />
+						<c:set var="memberno" value="${item.memberno}" />
+						<c:set var="postdate" value="${item.postdate}" />
+						<c:set var="postview" value="${item.postview}" />
+						<c:set var="posttype" value="${item.posttype}" />
+						<c:set var="postpublic" value="${item.postpublic}" />
+						<c:set var="postno" value="${item.postno}" />
 
-						<div style="width: 16%;">2022.02.03</div>
-						<div style="width: 16%;">45</div>
-					</div>
+						<c:choose>
+							<c:when test="${postpublic eq '비공개'}">
+								<a
+									href="#">
+									<div class="snu_qna_content" id="protected_qna_content">
+										<div style="width: 8%;">${postcategory }</div>
+										<div style="width: 44%; text-align: left;">${posttitle }
+											<i class="fa-solid fa-lock"></i>
+										</div>
+										<c:choose>
+											<c:when test="${posttype eq '익명'}">
+												<div style="width: 16%;">익명</div>
+											</c:when>
+											<c:otherwise>
+												<div style="width: 16%;">${memberno}번회원</div>
+											</c:otherwise>
+										</c:choose>
+										<div style="width: 16%;">${fn:substring(postdate,0,10)}</div>
+										<div style="width: 16%;">${postview }</div>
+									</div>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a
+									href="${pageContext.request.contextPath }/community/Q&A_view_page.do?postno=${postno}">
+									<div class="snu_qna_content">
+										<div style="width: 8%;">${postcategory }</div>
+										<div style="width: 44%; text-align: left;">${posttitle }</div>
 
-					<div class="snu_qna_content">
-						<div style="width: 8%;">질문</div>
-						<div style="width: 44%; text-align: left;">예시 제목2 입니다</div>
+										<c:choose>
+											<c:when test="${posttype eq '익명'}">
+												<div style="width: 16%;">익명</div>
+											</c:when>
+											<c:otherwise>
+												<div style="width: 16%;">${memberno}번회원</div>
+											</c:otherwise>
+										</c:choose>
+										<div style="width: 16%;">${fn:substring(postdate,0,10)}</div>
+										<div style="width: 16%;">${postview }</div>
+									</div>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 
-						<div style="width: 16%;">조홍식</div>
 
-						<div style="width: 16%;">2022.02.03</div>
-						<div style="width: 16%;">1,553</div>
-					</div>
 
-					<div class="snu_qna_content">
-						<div style="width: 8%;">질문</div>
-						<div style="width: 44%; text-align: left;">안녕하세요 자원봉사단 단장
-							이창준 입니다.</div>
-						<div style="width: 16%;">이창준</div>
-
-						<div style="width: 16%;">2022.02.03</div>
-						<div style="width: 16%;">123,456,789</div>
-					</div>
 				</div>
 
 				<div class="snu_qna_write_box">
-					<a class="snu_qna_write_btn">글쓰기</a>
+					<a href="${pageContext.request.contextPath}/community/Q&A_write.do"
+						class="snu_qna_write_btn">글쓰기</a>
 				</div>
 
 			</div>
@@ -181,10 +221,7 @@
 	</div>
 
 	<!--모바일 -->
-
-
 	<div class="snu_mobile_box">
-
 		<!-- 모바일 헤더-->
 		<%@ include file="../../include/MOBILE/header.jsp"%>
 		<%@ include file="../../include/MOBILE/tab.jsp"%>

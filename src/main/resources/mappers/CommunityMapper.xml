@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommunityMapper">
+
+	<resultMap id="CommunityMap"
+		type="study.spring.seoulspring.model.Community">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="postno" column="postno" />
+		<result property="postcategory" column="postcategory" />
+		<result property="posttype" column="posttype" />
+		<result property="posttitle" column="posttitle" />
+		<result property="postcontent" column="postcontent" />
+		<result property="postdate" column="postdate" />
+		<result property="postpublic" column="postpublic" />
+		<result property="postview" column="postview" />
+		<result property="memberno" column="memberno" />
+
+	</resultMap>
+
+	<insert id="insertPost" parameterType="study.spring.seoulspring.model.Community">
+		INSERT INTO community (postcategory,posttype,posttitle,postcontent,postdate,memberno,postpublic) 
+		VALUES (#{postcategory},#{posttype},#{posttitle},#{postcontent},#{postdate},#{memberno},#{postpublic})
+	</insert>
+	
+	<select id="selectList"
+		parameterType="study.spring.seoulspring.model.Community"
+		resultMap="CommunityMap">
+		SELECT * FROM community ORDER BY postno DESC;
+	</select>
+	
+	<select id="selectOne"
+		parameterType="study.spring.seoulspring.model.Community"
+		resultMap="CommunityMap">
+		SELECT * FROM community WHERE postno=#{postno}
+	</select>
+	<update id="updateViewCount"
+		parameterType="study.spring.seoulspring.model.Community">
+		UPDATE community SET postview= postview+1
+		WHERE
+		postno=#{postno}
+	</update>
+	
+
+
+
+
+
+
+</mapper>
