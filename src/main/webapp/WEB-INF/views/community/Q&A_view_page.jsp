@@ -68,6 +68,7 @@
 	border: none;
 	color: white;
 	background-color: #0f0f70;
+	
 	padding: 7px 20px;
 	border-radius: 10px;
 	font-size: 20px;
@@ -89,7 +90,6 @@
 
 <body>
 	<!-- pc부분 -->
-
 	<div class="main_box">
 		<div class="header">
 			<%@ include file="../../include/WEB/header.jsp"%>
@@ -99,14 +99,8 @@
 
 		<div class="snu_main_box">
 			<div class="snu_main_header">
-				공지사항 <img
-					src="${pageContext.request.contextPath }/assets/img/snu_logo.png" />
+				공지사항 <img src="${pageContext.request.contextPath }/assets/img/snu_logo.png" />
 				${reply.reply_txt}
-			</div>
-			<div class="post_delete_btn_box">
-				<c:if test="${output.name eq member.getName()}">
-					<a class="post_delete_btn" href="${pageContext.request.contextPath}/community/post_delete.do?postno=${output.postno}">삭제</a>
-				</c:if>
 			</div>
 
 			<c:set var="postdate" value="${output.postdate}" />
@@ -115,8 +109,8 @@
 					<c:set var="name" value="익명" />
 				</c:when>
 				<c:otherwise>
-					<c:set var="name" value="${output.name}" />
-
+					<c:set var="name" value="${output.memberno}번회원" />
+					
 				</c:otherwise>
 			</c:choose>
 
@@ -128,11 +122,19 @@
 
 				<div class="post_main_text">${output.postcontent}</div>
 			</div>
+			${reply.post_num}
+			${reply.reply_num}
+			${reply.reply_txt}
+			${reply.reply_name}
 
 
 			<div class="post_btn_box">
-				<a>답글</a> <a
-					href="${pageContext.request.contextPath}/community/Q&A.do">목록</a>
+ 			<form action="${pageContext.request.contextPath}/community/reply_write_insert.do" method="POST">
+ 			<input type="hidden" name='postno' value="${output.postno}"/>
+				<textarea name = "posttext" style="width: 100%; height: 400px; padding: 10px 5px; font-size: 20px;" placeholder="내용을 입력해 주세요...."></textarea>
+				<button>글쓰기</button>
+			</form>
+				<a href="${pageContext.request.contextPath}/community/Q&A.do">목록</a>
 			</div>
 
 		</div>
@@ -179,7 +181,8 @@
 
 
 			<div class="post_btn_box">
-				<button>답글</button>
+			
+				<a href="${pageContext.request.contextPath}/community/Q&A_write.do"><button>답글</button></a>
 				<button>목록</button>
 			</div>
 			<!--모바일 메인 이너 끝-->
@@ -206,7 +209,7 @@
 		
 	</script>
 	<script src="${pageContext.request.contextPath}/assets/js/regex.js"></script>
-	<script type="text/javascript">
+	<script>
 		
 	</script>
 

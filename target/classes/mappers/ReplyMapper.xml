@@ -10,6 +10,7 @@
 		<result property="post_num" column="post_num" />
 		<result property="reply_num" column="reply_num" />
 		<result property="reply_txt" column="reply_txt" />
+		<result property="reply_name" column="reply_name" />
 		
 	</resultMap>
 
@@ -22,6 +23,11 @@
 		resultMap="ReplyMap">
 		select * from reply WHERE post_num = #{post_num}
 	</select>
+	
+	<insert id="insertPost" parameterType="study.spring.seoulspring.model.Reply">
+		INSERT INTO reply (reply_name,reply_txt,post_num) 
+		VALUES (#{reply_name},#{reply_txt},#{post_num})
+	</insert>
 	
 	
 
