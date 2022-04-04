@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Reservation {
 	
-	private String startime;
+	private String starttime;
 	private String endtime;
 	private String date;
 	private String membername;

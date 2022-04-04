@@ -19,12 +19,17 @@
 	<insert id="insertReservation"
 		parameterType="study.spring.seoulspring.model.Reservation">
 		INSERT INTO roomTimeTable
-		(starttime,endtime,date,membername,phonenum,studentid)
+		(starttime,endtime,date,membername,phonenum,studentid,peoplenum)
 		VALUES
-		(#{starttime},#{endtime},#{date},#{membername},#{phonenum},#{studentid})
+		(#{starttime},#{endtime},#{date},#{membername},#{phonenum},#{studentid},#{peoplenum})
 		
-	
 	</insert>
+	
+	<select id="selectList"
+		parameterType="study.spring.seoulspring.model.Reservation"
+		resultMap="ReservationMap">
+		SELECT * FROM roomTimeTable WHERE date=#{date};
+	</select>
 
 
 

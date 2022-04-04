@@ -155,7 +155,7 @@ input:focus {
 
 </head>
 
-<body style="position:relative;">
+<body style="position: relative;">
 	<%@ include file="../include/MOBILE/tab.jsp"%>
 	<!-- pc부분 -->
 	<div class="main_box">
@@ -303,28 +303,32 @@ input:focus {
 						<span id="time_28">22:30</span><span id="time_28_1"
 							class="last_btn_label">23:00</span>
 					</button>
+					<input class="time_table_button" type="hidden" id="29"
+						value="23:00" />
+
+
 				</div>
 			</div>
 
-			<form class="room_reserve_form" action=" method="post"
-				action="${pageContext.request.contextPath }/reservation/reservation_insert.do"">
+			<form class="room_reserve_form" method="post"
+				action="${pageContext.request.contextPath }/reservation/reservation_insert.do">
 				<br> <br> <br> <br> <br>
 				<div>
-					<span>선택시간</span> <span class="inserted_time"></span> 
-					<input type="hidden" name="start_time" class="start_time" /> 
-					<input type="hidden" name="end_time" class="end_time" /> 
-					<br> 
-					<label for="rent_objective">공실 대여 목적</label> 
-					<input type="text" id="rent_objective" />
-					 <br> 
-					<label for="people_num">사용 인원수</label> 
-					<input type="text" id="people_num" name="" />
-					<br> 
-					<label for="student_name">대표 예약자 성함</label> 
-					<input type="text" id="student_name" /> <br> 
-					<label for="student_id">대표 예약자 학번</label> <input type="text" id="student_id" /> 
-					<br> 
-					<label for="student_phNum">대표 예약자 연락처</label> <input type="text" id="student_phNum" />
+					<span>선택시간</span> <span class="inserted_time"></span> <input
+						type="hidden" name="start_time" id="start_time" value="" /> <input
+						type="hidden" name="end_time" id="end_time" value="" /> <br>
+
+					<label for="rent_objective">공실 대여 목적</label> <input type="text"
+						id="rent_objective" name="rent_objective" /> <br> <label
+						for="people_num">사용 인원수</label> <input type="text" id="people_num"
+						name="people_num" value="" /> <br> <label for="student_name">대표
+						예약자 성함</label> <input type="text" id="student_name" name="student_name"
+						value="" /> <br> <label for="student_id">대표 예약자 학번</label> <input
+						type="text" id="student_id" name="student_id" value="" /> <br>
+
+					<label for="student_phNum">대표 예약자 연락처</label> <input type="text"
+						id="student_phNum" name="student_phNum" /> <input type="hidden"
+						id="date" name="date" value="${date}" />
 
 				</div>
 				<div id="btn_box">
@@ -347,16 +351,7 @@ input:focus {
 	</div>
 
 
-
-
-
-
-
-
-
-
-
-
+	<script src="${pageContext.request.contextPath }/assets/js/regex.js" />
 	<script src="https://kit.fontawesome.com/695be3a17b.js"
 		crossorigin="anonymous"></script>
 	<script
@@ -372,6 +367,7 @@ input:focus {
 		var last = 0;
 		var start_time = "";
 		var end_time = "";
+
 		//$(".time_table_button").click(function(){
 		//    $(".time_table_button").attr("disabled",true);
 		//    var selected = parseInt($(this).attr("id"));
@@ -414,8 +410,8 @@ input:focus {
 					$("#time_" + (last + 1)).css("color", "green");
 				}
 				$(".inserted_time").html(start_time + " ~ " + end_time);
-				$(".start_time").val(start_time);
-				$(".end_time").val(end_time);
+				$("#start_time").val(start_time);
+				$("#end_time").val(end_time);
 				click_count++;
 				return;
 
@@ -432,7 +428,7 @@ input:focus {
 
 			}
 
-		})
+		});
 		$("#student_phNum")
 				.keyup(
 						function() {
@@ -445,7 +441,69 @@ input:focus {
 															/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
 															"$1-$2-$3")
 													.replace("--", "-"));
-						})
+							console.log($(this).val());
+						});
+		$("#people_num").keyup(function() {
+			$(this).val($(this).val().replace(/[^0-9]/g, ""));
+		});
+		$("#student_id").keyup(function() {
+			$(this).val($(this).val().replace(/[^0-9]/g, ""));
+		});
+
+		$(".room_reserve_form")
+				.submit(
+						function(e) {
+							var start_time = $("#start_time").val();
+							var end_time = $("#end_time").val();
+							var student_name = $("#student_name").val();
+							var student_phNum = $("#student_phNum").val();
+							var student_id = $("#student_id").val();
+							var people_num = $("#people_num").val();
+							var date = $("#date").val();
+							e.preventDefault();
+							var formData = new FormData(this);
+							if (!regex.value('#start_time', '시작시간을 입력하세요')) {
+								return false;
+							}
+							if (!regex.value('#student_name', '이름을 입력하세요')) {
+								return false;
+							}
+
+							$
+									.ajax({
+										type : "GET",
+										url : "${pageContext.request.contextPath}/reservation/reservation_insert.do?start_time="
+												+ start_time
+												+ "&end_time="
+												+ end_time
+												+ "&student_name="
+												+ student_name
+												+ "&student_phNum="
+												+ student_phNum
+												+ "&student_id="
+												+ student_id
+												+ "&people_num="
+												+ people_num
+												+ "&date=" + date,
+
+										success : function() {
+											alert("공실 예약이 완료 되었습니다!!");
+											location.reload();
+
+										},
+										cache : false,
+										contentType : false,
+										processData : false,
+										error : function(request, status, error) {
+
+											alert("code:" + request.status
+													+ "\n" + "message:"
+													+ request.responseText
+													+ "\n" + "error:" + error);
+										}
+									});
+
+						});
 	</script>
 </body>
 </html>
