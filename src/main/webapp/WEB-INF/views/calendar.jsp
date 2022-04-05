@@ -355,6 +355,22 @@ form {
 									</c:if>
 
 									<c:choose>
+									<c:when test="${dateList.value=='today'}">
+											<td class="today">
+
+												<div class="date">${dateList.date}
+													<c:if test="${i <=14 && i>=0 }">
+														<div class="reserve_btn_box">
+															<br> <a class="reserve_btn"
+																onclick="javascript:goPage('106','${calendar_date}')">9-106호</a>
+															<br> <a class="reserve_btn"
+																onclick="javascript:goPage('107','${calendar_date}')">9-107호</a>
+														</div>
+													</c:if>
+												</div>
+												<div></div>
+											</td>
+										</c:when>
 							
 										<c:when test="${date_status.index%7==6}">
 											<td class="sat_day">

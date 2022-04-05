@@ -77,7 +77,13 @@
 				<div class="third_right">
 					<div class="third_right_top">홍보게시판</div>
 					<div class="third_right_bot">
-						<div></div>
+						<div>
+							<a
+								href="${pageContext.request.contextPath}/festive/festive_detail.do">
+								<img style="width: 100%"
+								src="${pageContext.request.contextPath}/assets/img/festive/festive1.jpg">
+							</a>
+						</div>
 						<div></div>
 
 					</div>

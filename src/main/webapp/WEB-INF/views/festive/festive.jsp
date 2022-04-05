@@ -95,7 +95,7 @@
 					<a href="${pageContext.request.contextPath}/festive/festive_detail.do">
 						<div class="festive_list_inner_img">
 							<img
-								src="${pageContext.request.contextPath}/assets/img/kakao.png">
+								src="${pageContext.request.contextPath}/assets/img/festive/festive1.jpg">
 						</div>
 						<div class="festive_list_inner_state">
 							<span>[진행]</span> 1. 첫번째 행사입니다

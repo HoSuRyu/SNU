@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -151,6 +152,9 @@ input:focus {
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
+.time_table_row .disabled:disabled{
+background-color:red;
+}
 </style>
 
 </head>
@@ -287,19 +291,19 @@ input:focus {
 						<span id="time_24">20:30</span>
 					</button>
 					<button class="time_table_button" type="button" id="25"
-						value="21:00">
+						name="21:00" value="21:00">
 						<span id="time_25">21:00</span>
 					</button>
 					<button class="time_table_button" type="button" id="26"
-						value="21:30">
+						name="21:30" value="21:30">
 						<span id="time_26">21:30</span>
 					</button>
 					<button class="time_table_button" type="button" id="27"
-						value="22:00">
+						name="22:00" value="22:00">
 						<span id="time_27">22:00</span>
 					</button>
 					<button class="time_table_button" type="button" id="28"
-						value="22:30">
+						name="22:30" value="22:30">
 						<span id="time_28">22:30</span><span id="time_28_1"
 							class="last_btn_label">23:00</span>
 					</button>
@@ -361,6 +365,45 @@ input:focus {
 	</script>
 
 	<script>
+	var starttime_list = new Array();
+	var endtime_list = new Array();
+	//jstl 변수 리스트에 담기 
+	<c:forEach items="${output}" var="item">
+	starttime_list.push("${item.starttime}");
+	endtime_list.push("${item.endtime}");
+
+	</c:forEach>
+	
+	
+		$(document).ready(function() {
+			var arrLength = '${fn:length(output)}';
+			console.log(arrLength);
+			for(var i=0; i<starttime_list.length; i++){
+				console.log("starttime="+starttime_list[i]);
+				console.log("endtime="+endtime_list[i]);
+				var start_index =parseInt($('[value="'+starttime_list[i]+'"]').attr("id"));
+				var end_index =parseInt($('[value="'+endtime_list[i]+'"]').attr("id"));
+				
+				console.log("starttime="+start_index);
+				console.log("endtime="+end_index);
+				for(var j=start_index; j<end_index; j++)
+				{
+					
+					$("#"+j).addClass("disabled");
+					$("#"+j).attr("disabled", true);
+					console.log(j);
+					
+					
+				}
+				$(".disabled").css("color", "red");
+				
+			
+			}
+			
+		
+
+		});
+
 		var click_count = 0;
 
 		var fisrt = 0;
@@ -395,10 +438,19 @@ input:focus {
 				if (last - first >= 8) {
 					alert("최대 4시간 까지 대여 가능합니다. 다시 선택해 주세요");
 					$(".time_table_button").attr("disabled", false);
+					$(".disabled").attr("disabled", true);
 					click_count = 0;
 					return;
 				}
+				
 				for (var i = first; i <= last; i++) {
+					if($("#"+i).hasClass("disabled") ==true){
+						alert("예약 불가능한 시간이 있습니다. 시간을 다시 선택해주세요");
+						$(".time_table_button").attr("disabled", false);
+						$(".disabled").attr("disabled", true);
+						click_count = 0;
+						return;
+					}
 					$("#" + i).attr("disabled", true);
 				}
 
@@ -417,9 +469,11 @@ input:focus {
 
 			} else {
 				$(".time_table_button").attr("disabled", false);
+				$(".disabled").attr("disabled", true);
 				$(this).attr("disabled", true);
 				click_count = 1;
 				first = parseInt($(this).attr("id"));
+				$(".inserted_time").html("");
 				if (last % 7 == 0) {
 					$("#time_" + (last) + "_1").css("color", "black");
 				} else {
