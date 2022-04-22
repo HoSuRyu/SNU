@@ -3,16 +3,13 @@ package study.spring.seoulspring.model;
 import lombok.Data;
 
 @Data
-public class Community {
-	private int postno;
-	private String postcategory;
-	private String posttype;
-	private String posttitle;
-	private String postcontent;
+public class Announce {
+	private int announceno;
+	private String title;
+	private String text;
+	private String img;
+	private int view;
 	private String postdate;
-	private String postpublic;
-	private int postview;
-	private String name;
 	
 	private static int offset;
 	private static int listCount;
@@ -20,14 +17,13 @@ public class Community {
 		return offset;
 	}
 	public static void setOffset(int offset) {
-		Community.offset = offset;
+		Announce.offset = offset;
 	}
 	public static int getListCount() {
 		return listCount;
 	}
 	public static void setListCount(int listCount) {
-		Community.listCount = listCount;
-	
+		Announce.listCount = listCount;
+	}
 
-}
 }

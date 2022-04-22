@@ -16,7 +16,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>제41대 사범대학 학생회 늘품</title>
 
-<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+<link
+	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/css/side_btn.css" />
 
@@ -34,12 +36,17 @@
 	href="${pageContext.request.contextPath}/assets/css/style.css" />
 
 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/css/main/pagination.css" />
+
+
 
 
 <style type="text/css">
-.main_box{
+.main_box {
 	font-family: 'NanumGothic';
 }
+
 .snu_qna_box {
 	margin-bottom: 50px;
 }
@@ -211,15 +218,57 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-
+					<div class="snu_qna_write_box">
+						<a
+							href="${pageContext.request.contextPath}/community/Q&A_write.do"
+							class="snu_qna_write_btn">글쓰기</a>
+					</div>
 
 
 				</div>
+				<div class="paging_box">
+					<ul class="pagination">
+						<c:choose>
+							<c:when test="${pageData.prevPage >0 }">
+								<c:url value="/community/Q&A.do" var="prevPageUrl">
+									<c:param name="page" value="${pageData.prevPage }" />
+								</c:url>
+								<a href="${prevPageUrl }">[이전]</a>
 
-				<div class="snu_qna_write_box">
-					<a href="${pageContext.request.contextPath}/community/Q&A_write.do"
-						class="snu_qna_write_btn">글쓰기</a>
+							</c:when>
+							<c:otherwise>
+						[이전]
+						</c:otherwise>
+						</c:choose>
+						<c:forEach var="i" begin="${pageData.startPage}"
+							end="${pageData.endPage}" varStatus="status">
+							<c:url value="/community/Q&A.do" var="pageUrl">
+								<c:param name="page" value="${i}" />
+							</c:url>
+							<c:choose>
+								<c:when test="${pageData.nowPage ==i }">
+									<strong>[${i}]</strong>
+								</c:when>
+								<c:otherwise>
+									<a href="${pageUrl}">[${i}]</a>
+
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${pageData.nextPage >0 }">
+								<c:url value="/community/Q&A.do" var="nextPageUrl">
+									<c:param name="page" value="${pageData.nextPage }" />
+								</c:url>
+								<a href="${nextPageUrl }">[다음]</a>
+							</c:when>
+							<c:otherwise>
+						[다음]
+						</c:otherwise>
+						</c:choose>
+					</ul>
 				</div>
+
 
 			</div>
 		</div>
@@ -236,80 +285,78 @@
 		<!--모바일 컨텐츠 박스-->
 
 		<div class="snu_mobile_main_box">
-		
+
 
 			<div class="snu_main_header">
 				<span>건의 및 Q&A</span>
 			</div>
 			<div class="snu_mobile_qna_main_box">
-			<c:forEach var="item" items="${output}" varStatus="status">
-			<c:set var="postcategory" value="${item.postcategory}" />
-						<c:set var="posttitle" value="${item.posttitle}" />
-						<c:set var="name" value="${item.name}" />
-						<c:set var="postdate" value="${item.postdate}" />
-						<c:set var="postview" value="${item.postview}" />
-						<c:set var="posttype" value="${item.posttype}" />
-						<c:set var="postpublic" value="${item.postpublic}" />
-						<c:set var="postno" value="${item.postno}" />
-						<div class="snu_mobile_qna_content">
-				
-				
-		<c:choose>
-			<c:when test="${postpublic eq '비공개'}">
-			<div class="snu_mobile_qna_content_title">
-					<a href="#">
-					${posttitle}
-						<c:if test="${postpublic eq '비공개'}">
-							<i class="fas fa-lock" style="margin-left:2px;"></i>
-						</c:if>
+				<c:forEach var="item" items="${output}" varStatus="status">
+					<c:set var="postcategory" value="${item.postcategory}" />
+					<c:set var="posttitle" value="${item.posttitle}" />
+					<c:set var="name" value="${item.name}" />
+					<c:set var="postdate" value="${item.postdate}" />
+					<c:set var="postview" value="${item.postview}" />
+					<c:set var="posttype" value="${item.posttype}" />
+					<c:set var="postpublic" value="${item.postpublic}" />
+					<c:set var="postno" value="${item.postno}" />
+					<div class="snu_mobile_qna_content">
+
+
+						<c:choose>
+							<c:when test="${postpublic eq '비공개'}">
+								<div class="snu_mobile_qna_content_title">
+									<a href="#"> ${posttitle} <c:if
+											test="${postpublic eq '비공개'}">
+											<i class="fas fa-lock" style="margin-left: 2px;"></i>
+										</c:if>
+								</div>
+
+								<div class="snu_mobile_qna_content_detail">
+									<c:choose>
+										<c:when test="${posttype eq '익명'}">
+											<span>익명</span>
+										</c:when>
+										<c:otherwise>
+											<span>${name}</span>
+										</c:otherwise>
+									</c:choose>
+									<span>| ${postdate}</span> | <i class="far fa-eye"></i>${postview}
+								</div>
 					</div>
-					
-					<div class="snu_mobile_qna_content_detail">
-					<c:choose>
-						<c:when test="${posttype eq '익명'}">
-							<span>익명</span>
-						</c:when>
-						<c:otherwise>
-							<span>${name}</span>
-						</c:otherwise>
-					</c:choose>
-					<span>| ${postdate}</span> | <i class="far fa-eye"></i>${postview}
-					</div>
-				</div>
-				</a>
-			</c:when>
-			<c:otherwise>
-					<div class="snu_mobile_qna_content_title">
-					<a class="qna_read_btn" id="${postno}">
-					${posttitle}
-						<c:if test="${postpublic eq '비공개'}">
-							<i class="fas fa-lock" style="margin-left:2px;"></i>
-						</c:if>
-					</div>
-					
-					<div class="snu_mobile_qna_content_detail">
-					<c:choose>
-						<c:when test="${posttype eq '익명'}">
-							<span>익명</span>
-						</c:when>
-						<c:otherwise>
-							<span>${name}</span>
-						</c:otherwise>
-					</c:choose>
-					<span>| ${postdate}</span> | <i class="far fa-eye"></i>${postview}
-					</div>
-				</div>
-				</a>
+					</a>
+					</c:when>
+					<c:otherwise>
+						<div class="snu_mobile_qna_content_title">
+							<a class="qna_read_btn" id="${postno}"> ${posttitle} <c:if
+									test="${postpublic eq '비공개'}">
+									<i class="fas fa-lock" style="margin-left: 2px;"></i>
+								</c:if>
+						</div>
+
+						<div class="snu_mobile_qna_content_detail">
+							<c:choose>
+								<c:when test="${posttype eq '익명'}">
+									<span>익명</span>
+								</c:when>
+								<c:otherwise>
+									<span>${name}</span>
+								</c:otherwise>
+							</c:choose>
+							<span>| ${postdate}</span> | <i class="far fa-eye"></i>${postview}
+						</div>
+			</div>
+			</a>
 			</c:otherwise>
 			</c:choose>
-						
-						</c:forEach>
-				
+
+			</c:forEach>
+
 
 
 			<div class="snu_qna_write_box">
 				<a href="${pageContext.request.contextPath}/community/Q&A_write.do"
-						class="snu_qna_write_btn">글쓰기</a>
+					class="snu_qna_write_btn">글쓰기</a>
 			</div>
 
 		</div>

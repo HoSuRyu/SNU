@@ -38,6 +38,28 @@
 		resultMap="CommunityMap">
 		SELECT * FROM community WHERE postno=#{postno}
 	</select>
+	
+	<select id="selectone"
+		parameterType="study.spring.seoulspring.model.Community"
+		resultMap="CommunityMap">
+		SELECT * FROM snu.community order by postno desc limit 0,1;
+	</select>
+	
+	<select id="selectCount"
+		parameterType="study.spring.seoulspring.model.Community"
+	resultType="int">
+		SELECT count(*) FROM snu.community
+	</select>
+	
+	<select id="selectlist"
+		parameterType="study.spring.seoulspring.model.Community"
+		resultMap="CommunityMap">
+		SELECT * FROM snu.community order by postno DESC
+		<if test="listCount > 0">
+		LIMIT #{offset},#{listCount}
+		</if>
+	</select>
+	
 	<update id="updateViewCount"
 		parameterType="study.spring.seoulspring.model.Community">
 		UPDATE community SET postview= postview+1

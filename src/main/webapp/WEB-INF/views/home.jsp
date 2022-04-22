@@ -75,9 +75,21 @@
 				<div class="third_right">
 					<a href="${pageContext.request.contextPath}/festive/festive.do" class="third_right_top">홍보게시판</a>
 					<div class="third_right_bot">
-						<div></div>
-						<div></div>
+					<c:forEach var="item" items="${output1}" varStatus="status">
+                     <c:set var="title" value="${item.title}" />
+                     <c:set var="img" value="${item.img}" />
+                     <c:set var="no" value="${item.festiveno}" />
 
+                     <div class="main_festive_box">
+                        <a href="${pageContext.request.contextPath}/festive/festive_detail.do?festiveno=${no}"> <img style="width: 100%;"
+                           src="http://3.138.48.22:8080/upload/${img}" /> <br>
+                           <div class="main_festive_title">
+                              <span>${title}</span>
+                           </div>
+                        </a>
+                     </div>
+                  </c:forEach>
+		
 					</div>
 				</div>
 			</div>
@@ -90,10 +102,19 @@
 					</div>
 				</div>
 				<div class="notice_body">
-					<div class="notice_body_text">1번공지사항</div>
-					<div class="notice_body_text">2번공지사항</div>
-					<div class="notice_body_text">3번공지사항</div>
-					<div class="notice_body_text">4번공지사항</div>
+					<c:forEach var="item" items="${output}" varStatus="status">
+
+                  <c:set var="title" value="${item.title}" />
+                  <c:set var="img" value="${item.img}" />
+                  <c:set var="no" value="${item.announceno}" />
+                  <c:set var="postdate" value="${item.postdate}" />
+                  <c:set var="view" value="${item.view}" />
+                  <a
+                     href="${pageContext.request.contextPath }/community/announce_detail.do?announceno=${no}">
+                     <div class="notice_body_text">${title}</div>
+                  </a>
+
+               </c:forEach>
 				</div>
 			</div>
 		</div>

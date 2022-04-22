@@ -90,7 +90,7 @@ public class WebHelper {
 
         // 메시지 표시
         if (msg != null) {
-            html += "<script type='text/javascript'>alert('" + msg + "');</script>";
+            // html += "<script type='text/javascript'>alert('" + msg + "');</script>";
         }
 
         // 페이지 이동

@@ -304,8 +304,8 @@
 					move_distance += $("#li_" + i).outerWidth(true);
 				}
 				$(".midd ul").animate({
-					left : "-" + move_distance + "px"
-				}, 500);
+					left : "-" + move_distance+ + "px"
+				}, 200);
 			} else {
 				$(".midd ul").animate({
 					left : "0px"

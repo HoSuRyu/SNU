@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AnnounceMapper">
+
+	<resultMap id="AnnounceMap"
+		type="study.spring.seoulspring.model.Announce">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="announceno" column="announceno" />
+		<result property="title" column="title" />
+		<result property="text" column="text" />
+		<result property="img" column="img" />
+		
+		<result property="postdate" column="postdate" />
+	</resultMap>
+
+	<insert id="insertPost"
+		parameterType="study.spring.seoulspring.model.Announce">
+		INSERT INTO announce
+		(title,text,img,postdate)
+		VALUES
+		(#{title},#{text},#{img},#{postdate})
+	</insert>
+
+	<insert id="insertImg" parameterType="java.util.List">
+		INSERT INTO announce_img
+		(announceno,img) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.announceno}, #{item.img})
+		</foreach>
+	</insert>
+	
+	<select id="selectList"
+		parameterType="study.spring.seoulspring.model.Announce"
+		resultMap="AnnounceMap">
+		SELECT * FROM snu.announce order by announceno DESC
+		<if test="listCount > 0">
+		LIMIT #{offset},#{listCount}
+		</if>
+	</select>
+	
+	
+	<select id="selectImgList"
+		parameterType="study.spring.seoulspring.model.Announce"
+		resultMap="AnnounceMap">
+		SELECT * FROM snu.announce order by announceno DESC;
+	</select>
+	
+	
+	<select id="selectOne"
+		parameterType="study.spring.seoulspring.model.Announce"
+		resultMap="AnnounceMap">
+		SELECT * FROM snu.announce order by announceno desc limit 0,1;
+	</select>
+	
+	<select id="selectDetail"
+		parameterType="study.spring.seoulspring.model.Announce"
+		resultMap="AnnounceMap">
+		SELECT * FROM snu.announce WHERE announceno=#{announceno};
+	
+	</select>
+	
+	<update id="updateViewCount"
+		parameterType="study.spring.seoulspring.model.Announce">
+		UPDATE announce SET view = view+1 WHERE announceno=#{announceno};
+	</update>
+	
+	<select id="selectimgList"
+		parameterType="study.spring.seoulspring.model.Announce"
+		resultMap="AnnounceMap">
+		SELECT * FROM snu.announce_img WHERE announceno=#{announceno}
+	</select>
+	
+	<select id="selectCount"
+		parameterType="study.spring.seoulspring.model.Announce"
+	resultType="int">
+		SELECT count(*) FROM snu.announce
+	</select>
+	
+	
+
+
+
+
+
+
+
+
+
+</mapper>

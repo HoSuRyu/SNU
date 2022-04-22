@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FestiveMapper">
+
+	<resultMap id="FestiveMap"
+		type="study.spring.seoulspring.model.Festive">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="festiveno" column="festiveno" />
+		<result property="title" column="title" />
+		<result property="text" column="text" />
+		<result property="img" column="img" />
+		<result property="end_date" column="end_date" />
+	</resultMap>
+
+	<insert id="insertPost"
+		parameterType="study.spring.seoulspring.model.Festive">
+		INSERT INTO festive
+		(title,text,img,end_date)
+		VALUES
+		(#{title},#{text},#{img},#{end_date})
+	</insert>
+
+	<insert id="insertImg" parameterType="java.util.List">
+		INSERT INTO festive_img
+		(festiveno,img) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.festiveno}, #{item.img})
+		</foreach>
+	</insert>
+	
+	<select id="selectList"
+		parameterType="study.spring.seoulspring.model.Festive"
+		resultMap="FestiveMap">
+		SELECT * FROM snu.festive order by festiveno DESC
+		<if test="listCount > 0">
+		LIMIT #{offset},#{listCount}
+		</if>
+	</select>
+	
+	
+	<select id="selectImgList"
+		parameterType="study.spring.seoulspring.model.Festive"
+		resultMap="FestiveMap">
+		SELECT * FROM snu.festive order by festiveno DESC;
+	</select>
+	
+	
+	<select id="selectOne"
+		parameterType="study.spring.seoulspring.model.Festive"
+		resultMap="FestiveMap">
+		SELECT * FROM snu.festive order by festiveno desc limit 0,1;
+	</select>
+	
+	<select id="selectDetail"
+		parameterType="study.spring.seoulspring.model.Festive"
+		resultMap="FestiveMap">
+		SELECT * FROM snu.festive WHERE festiveno=#{festiveno}
+	</select>
+	
+	<select id="selectimgList"
+		parameterType="study.spring.seoulspring.model.Festive"
+		resultMap="FestiveMap">
+		SELECT * FROM snu.festive_img WHERE festiveno=#{festiveno}
+	</select>
+	
+	<select id="selectCount"
+		parameterType="study.spring.seoulspring.model.Festive"
+	resultType="int">
+		SELECT count(*) FROM snu.festive
+	</select>
+	
+	
+
+
+
+
+
+
+
+
+
+</mapper>

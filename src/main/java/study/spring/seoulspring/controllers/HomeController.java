@@ -5,19 +5,17 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
+import org.json.simple.JSONObject; // JSON객체 생성
+import org.json.simple.parser.JSONParser; // JSON객체 파싱
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +28,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.protobuf.ByteString.Output;
-
 import study.spring.seoulspring.helper.WebHelper;
-import study.spring.seoulspring.model.DateData;
-import study.spring.seoulspring.model.Department;
+import study.spring.seoulspring.model.Announce;
+import study.spring.seoulspring.model.Festive;
 import study.spring.seoulspring.model.Member;
 import study.spring.seoulspring.model.View;
+import study.spring.seoulspring.service.AnnounceService;
 import study.spring.seoulspring.service.DepartmentService;
+import study.spring.seoulspring.service.FestiveService;
 import study.spring.seoulspring.service.ViewService;
-
-import org.json.simple.JSONObject; // JSON객체 생성
-import org.json.simple.JSONArray; // JSON이 들어있는 Array 생성
-import org.json.simple.parser.JSONParser; // JSON객체 파싱
-import org.json.simple.parser.ParseException;
 
 /**
  * Handles requests for the application home page.
@@ -51,6 +44,10 @@ import org.json.simple.parser.ParseException;
 @Controller
 public class HomeController {
 
+	@Autowired
+	FestiveService festiveService;
+	@Autowired
+	AnnounceService announceService;
 	@Autowired
 	DepartmentService departmentService;
 	@Autowired
@@ -67,11 +64,34 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	   public String home(Locale locale, Model model) {
+	      logger.info("Welcome home! The client locale is {}.", locale);
+	      
+	      //공지사항 4개
+	      Announce input = new Announce();
+	      Announce.setOffset(0);
+	      Announce.setListCount(4);
+	      List <Announce> output = null;
+	      
+	      //홍보게시판
+	      Festive input1 =new Festive();
+	      Festive.setOffset(0);
+	      Festive.setListCount(2);
+	      List <Festive> output1 = null;
+	      
+	      try {
+	         output = announceService.selectList(input);
+	         output1 = festiveService.selectList(input1);
+	      } catch (Exception e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      model.addAttribute("output", output);
+	      model.addAttribute("output1", output1);
+	            
 
-		return "home";
-	}
+	      return "home";
+	   }
 
 	@RequestMapping(value = "/pdf.do", method = RequestMethod.GET)
 	public String pdf(Model model) {
@@ -202,9 +222,8 @@ public class HomeController {
 		String referer = request.getHeader("REFERER");
 		HttpSession session = request.getSession();
 		session.invalidate();
-		String redirectUrl =contextPath;
-		
-			
+		String redirectUrl = contextPath;
+
 		return this.webHelper.redirect(redirectUrl, null);
 	}
 
@@ -238,6 +257,5 @@ public class HomeController {
 	public void ViewCountUpdate(String title) {
 
 	}
-
 
 }

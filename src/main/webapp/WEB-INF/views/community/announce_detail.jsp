@@ -122,38 +122,16 @@
 			<%@ include file="../../include/WEB/side_bar.jsp"%>
 		</div>
 
-		<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd" />
-		<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}"
-			integerOnly="true" var="strDate"></fmt:parseNumber>
-
-
-
-		<fmt:parseDate value="${output.end_date }" var="endPlanDate"
-			pattern="yyyy-MM-dd" />
-		<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}"
-			integerOnly="true" var="endDate"></fmt:parseNumber>
-		<c:set var="DATE" value="${endDate -strDate } " />
-		<fmt:parseNumber var="i" integerOnly="true" type="number"
-			value="${DATE}" />
-		<c:choose>
-			<c:when test="${i<0}">
-				<c:set var="status" value="<span style='color:gray'>[마감] </span>" />
-			</c:when>
-			<c:otherwise>
-				<c:set var="status"
-					value="<span style='color:#0f0f70'>[진행중] </span>" />
-			</c:otherwise>
-
-		</c:choose>
+		
 
 		<div class="snu_main_box">
-			<div class="snu_main_header">${status }${ output.title }</div>
+			<div class="snu_main_header">${ output.title }</div>
 			<div class="" style="width: 70%; margin: auto;">
 				<div class="photo" style="margin-top: 30px">
 					<div class="head">
 
 						<img class="main_img" style="width: 100%;"
-							src="http://3.138.48.22:8080/upload/${output.img}" />
+							src="http://3.138.48.22:8080/announce/${output.img}" />
 					</div>
 					<a class="prev"> <span>이전</span>
 					</a> <a class="next"> <span>이후</span>
@@ -162,7 +140,7 @@
 						<ul>
 							<li id="li_0"><a class="small_img_box on"> <img
 									class="small_img" id="0"
-									src="http://3.138.48.22:8080/upload/${output.img}" />
+									src="http://3.138.48.22:8080/announce/${output.img}" />
 							</a></li>
 
 							<c:forEach var="item" items="${imgoutput}" varStatus="status">
@@ -170,7 +148,7 @@
 								<c:set var="num" value="${num+1}" />
 								<li id="li_${num}"><a class="small_img_box"> <img
 										class="small_img" id="${num}"
-										src="http://3.138.48.22:8080/upload/${img}" />
+										src="http://3.138.48.22:8080/announce/${img}" />
 								</a></li>
 							</c:forEach>
 

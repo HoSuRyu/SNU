@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import study.spring.seoulspring.model.Announce;
 import study.spring.seoulspring.model.Community;
 import study.spring.seoulspring.service.CommunityService;
 
@@ -48,6 +49,25 @@ public class CommunityServiceImpl implements CommunityService {
 		int result =0;
 		result = sqlSession.delete("CommunityMapper.deletePost", input);
 		return 0;
+	}
+	@Override
+	public Community selectone() throws Exception{
+		Community result = null;
+		result = sqlSession.selectOne("CommunityMapper.selectone", null);
+		return result;
+	}
+	
+	@Override
+	public int getCommunityCount() throws Exception {
+		int result = 0;
+		result = sqlSession.selectOne("CommunityMapper.selectCount", null);
+		return result;
+	}
+	@Override
+	public List<Community> selectlist(Community input) throws Exception{
+		List<Community> result = null;
+		result =sqlSession.selectList("CommunityMapper.selectlist", input);
+		return result;
 	}
 
 }
