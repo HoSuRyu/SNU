@@ -140,7 +140,7 @@
 
 				</div>
 				<div class="menu">
-					<a class="menus 1" href="#"> <span style="text-align:center;">공실예약하기</span><br> (곧 오픈됩니다!)
+					<a class="menus 1" href="#"> <span style="text-align:center;">공실예약하기 <br> (곧 오픈됩니다!)</span>
 					</a> <a class="menus 2"
 						href="${pageContext.request.contextPath}/loadmap/snu_class_loadmap.do">졸업
 						로드맵</a> <a class="menus 3"
@@ -319,7 +319,7 @@
 
 
 			<div class="menu">
-				<a class="menus 1" href="#">  <span style="text-align:center;">공실예약하기</span> (곧 오픈됩니다!)
+				<a class="menus 1" href="#">  <span style="text-align:center;">공실예약하기<br>(곧 오픈됩니다!)</span>
 					</a> <a
 					class="menus 2"
 					href="${pageContext.request.contextPath}/loadmap/snu_class_loadmap.do">졸업

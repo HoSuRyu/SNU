@@ -92,6 +92,11 @@ public class CalendarController {
 		}
 
 	}
+	@RequestMapping(value = { "/reservation/info.do" }, method = RequestMethod.GET)
+	public String reservationinfo(Model model) 
+	{
+		return "reservation/info";
+	}
 
 	@RequestMapping(value = { "/reservation.do" }, method = RequestMethod.POST)
 
