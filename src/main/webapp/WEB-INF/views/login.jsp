@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta NAME="ROBOTS"CONTENT="NOINDEX,NOFOLLOW">
 <title>Login</title>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
@@ -198,11 +199,11 @@ img {
 				</c:if>
 			</div>
 
-			<input type='hidden' name='method' value='json' />  <input
-				class="id" type='text' name='si_id' value=''
-				placeholder="아이디를 입력해 주세요." autofocus /> <input class="pwd"
-				type='password' name='si_pwd' value='' placeholder="비밀번호를 입력해 주세요." />
-			<input class="submit" type='submit' value="입장하기" />
+			<input type='hidden' name='method' value='json' /> <input class="id"
+				type='text' name='si_id' value='' placeholder="아이디를 입력해 주세요."
+				autofocus /> <input class="pwd" type='password' name='si_pwd'
+				value='' placeholder="비밀번호를 입력해 주세요." /> <input class="submit"
+				type='submit' value="입장하기" />
 			<div style="font-size: 10px;">MySNU아이디로 로그인 가능합니다</div>
 			<script
 				src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
