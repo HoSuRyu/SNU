@@ -74,6 +74,11 @@ public class CalendarController {
 
 	}
 
+	@RequestMapping(value = { "/reservation/info.do" }, method = RequestMethod.GET)
+	public String reservationinfo(Model model) {
+		return "reservation/info";
+	}
+
 	@RequestMapping(value = { "/reservation.do" }, method = RequestMethod.POST)
 
 	public String reservation(Model model, @RequestParam("reserve_date") String date,
@@ -101,8 +106,8 @@ public class CalendarController {
 		return "/reservation";
 
 	}
-	
-	@RequestMapping(value = "/conform.do" , method=RequestMethod.GET)
+
+	@RequestMapping(value = "/conform.do", method = RequestMethod.GET)
 	public String conform(Model model, HttpServletRequest request, Locale locale) {
 		List<study.spring.seoulspring.model.Calendar> calendar = new ArrayList<study.spring.seoulspring.model.Calendar>();
 		try {
