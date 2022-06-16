@@ -27,4 +27,18 @@ public class ReservationServiceImpl implements ReservationService {
 		return result;
 	}
 
+	@Override
+	public int DeleteReservation(Reservation input) throws Exception {
+		int result = 0;
+		result = sqlSession.insert("ReservationMapper.deleteReservation", input);
+		return result;
+	}
+
+	@Override
+	public double TimeSum(Reservation input) throws Exception {
+		double result = 0;
+		result = sqlSession.selectOne("ReservationMapper.TimeSum", input);
+		return result;
+	}
+
 }

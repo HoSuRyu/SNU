@@ -15,6 +15,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta NAME="ROBOTS"CONTENT="NOINDEX,NOFOLLOW">
 <title>제41대 사범대학 학생회 늘품</title>
 <link rel="icon" 
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
@@ -133,7 +134,7 @@
 						<a
 							href="${pageContext.request.contextPath}/festive/festive_detail.do?festiveno=${no}">
 							<div class="festive_list_inner_img">
-								<img src="${pageContext.request.contextPath}/../upload/${output.img}">
+								<img src="http://peda.snu.ac.kr:8080/upload/${img}">
 							</div>
 							<div class="festive_list_inner_state">
 								<span>${status}</span> ${title}
@@ -264,7 +265,7 @@
 						<a
 							href="${pageContext.request.contextPath}/festive/festive_detail.do?festiveno=${no}">
 							<div class="festive_list_inner_img">
-								<img src="${pageContext.request.contextPath}/../upload/${output.img}">
+								<img src="http://peda.snu.ac.kr:8080/upload/${img}">
 							</div>
 							<div class="festive_list_inner_state">
 								<span>${status}</span><br> ${title}

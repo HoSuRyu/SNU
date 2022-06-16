@@ -14,6 +14,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta NAME="ROBOTS"CONTENT="NOINDEX,NOFOLLOW">
 <title>제41대 사범대학 학생회 늘품</title>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
@@ -136,10 +137,9 @@
 			<div class="second_box">
 				<div class="onclick" style="border-bottom: 2px solid #0f0f70;">
 					<div class="button" style="padding-bottom: 3px;">바로가기</div>
-
 				</div>
 				<div class="menu">
-					<a class="menus 1" href="#"> <span style="text-align:center;">공실예약하기</span><br> (곧 오픈됩니다!)
+					<a class="menus 1" href="${pageContext.request.contextPath}/calendar.do"> <span style="text-align:center;">공실예약하기</span>
 					</a> <a class="menus 2"
 						href="${pageContext.request.contextPath}/loadmap/snu_class_loadmap.do">졸업
 						로드맵</a> <a class="menus 3"
@@ -167,7 +167,7 @@
 							<c:set var="no" value="${item.festiveno}" />
 							<a
 								href="${pageContext.request.contextPath}/festive/festive_detail.do?festiveno=${no}"><img
-								style="width: 80%;" src="${pageContext.request.contextPath}/../upload/${img}" />
+								style="width: 80%;" src="http://peda.snu.ac.kr:8080/upload/${img}" />
 								<span class="third_inner_text">${title}</span> </a>
 						</c:forEach>
 
@@ -304,7 +304,7 @@
 							href="${pageContext.request.contextPath}/festive/festive_detail.do?festiveno=${no}">
 							<div class="pr_body_first">
 								<div class="pr_body_photo">
-									<img src="${pageContext.request.contextPath}/../upload/${img}" alt="">
+									<img src="http://peda.snu.ac.kr:8080/upload/${img}" alt="">
 								</div>
 								<div class="pr_body_text">${title}</div>
 							</div>
@@ -318,7 +318,7 @@
 
 
 			<div class="menu">
-				<a class="menus 1" href="#">  <span style="text-align:center;">공실예약하기</span> (곧 오픈됩니다!)
+				<a class="menus 1" href="${pageContext.request.contextPath}/calendar.do">  <span style="text-align:center;">공실예약하기</span>
 					</a> <a
 					class="menus 2"
 					href="${pageContext.request.contextPath}/loadmap/snu_class_loadmap.do">졸업

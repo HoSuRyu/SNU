@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import study.spring.seoulspring.model.Calendar;
+import study.spring.seoulspring.model.TimeTable;
 import study.spring.seoulspring.model.Community;
 import study.spring.seoulspring.model.Council;
 import study.spring.seoulspring.service.CalendarService;
@@ -19,9 +19,9 @@ public class CalendarServiceImpl implements CalendarService {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<Calendar> selectList() throws Exception{
-			List<Calendar> result = null;
-			result = sqlSession.selectList("CalendarMapper.selectList", null);
+	public List<TimeTable> selectList(TimeTable input) throws Exception{
+			List<TimeTable> result = null;
+			result = sqlSession.selectList("CalendarMapper.selectlist", input);
 			return result;
 		}
 	}

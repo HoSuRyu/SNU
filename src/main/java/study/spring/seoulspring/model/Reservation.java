@@ -13,4 +13,7 @@ public class Reservation {
 	private int studentid;
 	private int peoplenum;
 	private int roomNum;
+	private String purpose;
+	private int calendarNo;
+	private double timeCount;
 }

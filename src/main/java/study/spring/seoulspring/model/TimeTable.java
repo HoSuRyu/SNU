@@ -5,27 +5,31 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class Calendar {
+public class TimeTable {
 	private String starttime;
 	private String endtime;
 	private int roomNum;
-	private Date date;
+	private String date;
 	private int calendarNo;
 	private String membername;
-	
+	private String studentid;
+	private String phonenum;
+	private int peoplenum;
+	private String purpose;
+
 	private static int offset;
 	private static int listCount;
 	public static int getOffset() {
 		return offset;
 	}
 	public static void setOffset(int offset) {
-		Calendar.offset = offset;
+		TimeTable.offset = offset;
 	}
 	public static int getListCount() {
 		return listCount;
 	}
 	public static void setListCount(int listCount) {
-		Calendar.listCount = listCount;
+		TimeTable.listCount = listCount;
 	
 
 }

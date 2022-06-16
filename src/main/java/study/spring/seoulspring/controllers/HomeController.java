@@ -64,34 +64,33 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	   public String home(Locale locale, Model model) {
-	      logger.info("Welcome home! The client locale is {}.", locale);
-	      
-	      //공지사항 4개
-	      Announce input = new Announce();
-	      Announce.setOffset(0);
-	      Announce.setListCount(4);
-	      List <Announce> output = null;
-	      
-	      //홍보게시판
-	      Festive input1 =new Festive();
-	      Festive.setOffset(0);
-	      Festive.setListCount(2);
-	      List <Festive> output1 = null;
-	      
-	      try {
-	         output = announceService.selectList(input);
-	         output1 = festiveService.selectList(input1);
-	      } catch (Exception e) {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }
-	      model.addAttribute("output", output);
-	      model.addAttribute("output1", output1);
-	            
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
 
-	      return "home";
-	   }
+		// 공지사항 4개
+		Announce input = new Announce();
+		Announce.setOffset(0);
+		Announce.setListCount(4);
+		List<Announce> output = null;
+
+		// 홍보게시판
+		Festive input1 = new Festive();
+		Festive.setOffset(0);
+		Festive.setListCount(2);
+		List<Festive> output1 = null;
+
+		try {
+			output = announceService.selectList(input);
+			output1 = festiveService.selectList(input1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("output", output);
+		model.addAttribute("output1", output1);
+
+		return "home";
+	}
 
 	@RequestMapping(value = "/pdf.do", method = RequestMethod.GET)
 	public String pdf(Model model) {
@@ -137,7 +136,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/login_ok.do", method = RequestMethod.POST)
 	public ModelAndView login(Locale locale, HttpServletRequest request, HttpServletResponse response, Model model,
-			@RequestParam("si_id") String si_id, @RequestParam("si_pwd") String si_pwd) throws MalformedURLException, IOException {
+			@RequestParam("si_id") String si_id, @RequestParam("si_pwd") String si_pwd)
+			throws MalformedURLException, IOException {
 
 		// 서울대 페이지를 통해 로그인
 		String id = si_id;
@@ -175,6 +175,10 @@ public class HomeController {
 		ouput.setName((String) jsonObj.get("SA_name"));
 		ouput.setDepartment((String) jsonObj.get("SA_gr1suborgname"));
 		ouput.setId((String) jsonObj.get("SA_mail"));
+		if ((String) jsonObj.get("SA_gr1memberkey") != null) 
+		{
+			ouput.setStudentid(((String) jsonObj.get("SA_gr1memberkey")).replace("-", ""));
+		}
 		model.addAttribute("ouput", ouput);
 
 		// session 설정
@@ -186,7 +190,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		// 이전페이지
-		
+
 		String redirectUrl = this.contextPath + "/";
 		Member ouput1 = new Member();
 		if (id.equals("root") && pw.equals("123qwe!@#")) {
@@ -201,6 +205,7 @@ public class HomeController {
 			ouput1.setName("류호수");
 			ouput1.setDepartment("매니저1");
 			ouput1.setId("매니저1");
+			ouput1.setStudentid("201511580");
 			session.setAttribute("member", ouput1);
 			return this.webHelper.redirect(redirectUrl, "류호수님 안녕하세요.");
 

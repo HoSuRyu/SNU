@@ -13,30 +13,42 @@
 		<result property="membername" column="membername" />
 		<result property="phonenum" column="phonenum" />
 		<result property="studentid" column="studentid" />
-		<result property="studentid" column="studentid" />
+		<result property="roomNum" column="roomNum" />
+		<result property="purpose" column="purpose" />
+		<result property="calendarNo" column="calendarNo" />
+		<result property="timeCount" column="timeCount" />
+		<result property="purpose" column="purpose" />
 	</resultMap>
 
 	<insert id="insertReservation"
 		parameterType="study.spring.seoulspring.model.Reservation">
 		INSERT INTO roomTimeTable
-		(starttime,endtime,date,membername,phonenum,studentid,peoplenum)
+		(starttime,endtime,date,membername,phonenum,studentid,peoplenum,roomNum,purpose,timeCount)
 		VALUES
-		(#{starttime},#{endtime},#{date},#{membername},#{phonenum},#{studentid},#{peoplenum})
-		
+		(#{starttime},#{endtime},#{date},#{membername},#{phonenum},#{studentid},#{peoplenum},#{roomNum},#{purpose},#{timeCount})
+
 	</insert>
-	
+
 	<select id="selectList"
 		parameterType="study.spring.seoulspring.model.Reservation"
 		resultMap="ReservationMap">
-		SELECT * FROM roomTimeTable WHERE date=#{date} and roomNum = #{roomNum};
+		SELECT * FROM roomTimeTable WHERE date=#{date} and roomNum =
+		#{roomNum};
+	</select>
+
+	<select id="TimeSum"
+		parameterType="study.spring.seoulspring.model.Reservation"
+		resultType="double">
+		select sum(timeCount) from roomTimeTable where studentid =#{studentid} and
+		roomNum =#{roomNum} and date =#{date}
 	</select>
 
 
-
-
-
-
-
+	<delete id="deleteReservation"
+		parameterType="study.spring.seoulspring.model.Reservation">
+		DELETE FROM roomTimeTable WHERE
+		calendarNo=#{calendarNo};
+	</delete>
 
 
 </mapper>

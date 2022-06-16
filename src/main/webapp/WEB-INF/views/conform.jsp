@@ -14,8 +14,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta NAME="ROBOTS" CONTENT="NOINDEX,NOFOLLOW">
 <title>제41대 사범대학 학생회 늘품</title>
-<link rel="icon" 
+<link rel="icon"
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css"
@@ -66,18 +67,41 @@
 
 
 				<div class="snu_qna_content" id="snu_qna_header">
-					<div style="width: 20%;">예약일</div>${calendar}
+					<div style="width: 20%;">예약일</div>
 					<div style="width: 15%;">호실</div>
-
 					<div style="width: 15%;">시간</div>
-
 					<div style="width: 20%;">예약자 이름</div>
+
 				</div>
 
-				
+				<c:forEach var="item" items="${calendar}" varStatus="status">
+					<c:set var="starttime" value="${item.starttime}" />
+					<c:set var="endtime" value="${item.endtime}" />
+					<c:set var="date" value="${item.date}" />
+					<c:set var="membername" value="${item.membername}" />
+					<c:set var="phonenum" value="${item.phonenum}" />
+					<c:set var="studentid" value="${item.studentid}" />
+					<c:set var="peoplenum" value="${item.peoplenum}" />
+					<c:set var="roomNum" value="${item.roomNum}" />
+					<c:set var="purpose" value="${item.purpose}" />
+					<c:set var="calendarNo" value="${item.calendarNo}" />
+					<a
+						href="${pageContext.request.contextPath}/reservation/info.do?studentid=${studentid}&calendarNo=${calendarNo}">
+						<div class="snu_qna_content" id="snu_qna_header"
+							style="font-weight: 600;">
+							<div style="width: 20%; display: inline-block;">${date}</div>
+							<div style="width: 15%; display: inline-block;">${roomNum }</div>
+							<div style="width: 15%; display: inline-block;">${starttime}-
+								${endtime }</div>
+							<div style="width: 20%; display: inline-block;">${membername}</div>
+						</div>
+					</a>
+				</c:forEach>
+
+
 
 			</div>
-
+			<!--  
 			<div class="paging_box ">
 				<ul class="pagination">
 					<c:choose>
@@ -113,8 +137,6 @@
 						</c:choose>
 
 					</c:forEach>
-
-
 					<c:choose>
 						<c:when test="${pageData.nextPage >0 }">
 							<c:url value="/community/conform.do" var="nextPageUrl">
@@ -134,6 +156,7 @@
 					</c:choose>
 				</ul>
 			</div>
+			 -->
 
 
 
@@ -164,8 +187,6 @@
 				<span>공지사항</span>
 
 			</div>
-
-
 			<div class="snu_mobile_qna_main_box">
 
 				<c:forEach var="item" items="${output}" varStatus="status">
@@ -187,7 +208,7 @@
 
 				</c:forEach>
 			</div>
-			
+
 			<c:if test="${member !=null }">
 				<c:if test="${member.name eq '관리자' }">
 					<div class="snu_qna_write_box">
@@ -210,7 +231,6 @@
 							<li class="disabled"><a href="#"><i
 									class="fas fa-angle-left"></i></a></li>
 						</c:otherwise>
-
 					</c:choose>
 
 					<c:forEach var="i" begin="${pageData.startPage}"
@@ -229,8 +249,6 @@
 						</c:choose>
 
 					</c:forEach>
-
-
 					<c:choose>
 						<c:when test="${pageData.nextPage >0 }">
 							<c:url value="/community/announce.do" var="nextPageUrl">

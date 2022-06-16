@@ -152,7 +152,7 @@
 					<div class="head">
 
 						<img class="main_img" style="width: 100%;"
-							src="http://147.47.106.57:8080/announce/${output.img}" />
+							src="http://peda.snu.ac.kr:8080/announce/${output.img}" />
 					</div>
 					<a class="prev"> <span>이전</span>
 					</a> <a class="next"> <span>이후</span>
@@ -161,7 +161,7 @@
 						<ul>
 							<li id="li_0"><a class="small_img_box on"> <img
 									class="small_img" id="0"
-									src="http://147.47.106.57:8080/announce/${output.img}" />
+									src="http://peda.snu.ac.kr:8080/announce/${output.img}" />
 							</a></li>
 
 							<c:forEach var="item" items="${imgoutput}" varStatus="status">
@@ -169,7 +169,7 @@
 								<c:set var="num" value="${num+1}" />
 								<li id="li_${num}"><a class="small_img_box"> <img
 										class="small_img" id="${num}"
-										src="http://147.47.106.57:8080/announce/${img}" />
+										src="http://peda.snu.ac.kr:8080/announce/${img}" />
 								</a></li>
 							</c:forEach>
 
@@ -220,14 +220,14 @@
 				<div style="width: 70%; margin: auto; margin-top: 30px">
 					<div style="position: relative;">
 						<img class="main_img" style="width: 100%;"
-							src="http://147.47.106.57:8080/announce/${output.img}" /> <a
+							src="http://peda.snu.ac.kr:8080/announce/${output.img}" /> <a
 							class="prev" style="left: -20%; bottom: 40%;"> <span>이전</span>
 						</a> <a class="next" style="right: -20%; bottom: 40%;"> <span>이후</span>
 						</a>
 						<ul style="display: none;">
 							<li id="li_0"><a class="small_img_box on"> <img
 									class="small_img" id="0"
-									src="http://147.47.106.57:8080/upload/${output.img}" />
+									src="http://peda.snu.ac.kr:8080/upload/${output.img}" />
 							</a></li>
 
 							<c:forEach var="item" items="${imgoutput}" varStatus="status">
@@ -235,7 +235,7 @@
 								<c:set var="num" value="${num+1}" />
 								<li id="li_${num}"><a class="small_img_box"> <img
 										class="small_img" id="${num}"
-										src="http://147.47.106.57:8080/announce/${img}" />
+										src="http://peda.snu.ac.kr:8080/announce/${img}" />
 								</a></li>
 							</c:forEach>
 						</ul>

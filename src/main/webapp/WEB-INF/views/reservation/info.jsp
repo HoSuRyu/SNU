@@ -78,7 +78,7 @@
 	display: inline-block;
 	background: #0f0f70;
 	color: white;
-	width: 10%;
+	width: 100px;
 	margin-top: 20px;
 	text-align: center;
 }
@@ -87,6 +87,14 @@
 	padding: 5px 0px;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+.snu_mobile_main_box .reservation_info_header {
+	font-size: 16px;
+}
+
+.snu_mobile_main_box .reservation_info_detail span {
+	font-size: 14px;
 }
 </style>
 
@@ -98,45 +106,50 @@
 		<div class="header">
 			<%@ include file="../../include/WEB/header.jsp"%>
 			<%@ include file="../../include/WEB/side_bar.jsp"%>
-
 		</div>
 		<div class="snu_main_box">
-
-
 			<div class="snu_main_header">
 				<span>나의 예약 내역</span> <img
 					src="${pageContext.request.contextPath}/assets/img/snu_logo.png" />
 			</div>
-
-			<div class="reservation_info_box">
-				<br> <br>
-				<div class="date_box">신청일 | 2022.05.28</div>
-				<div class="reservation_info_header">신청자 정보</div>
-				<div class="reservation_info_detail">
-					<span>학번 |</span><span>이름 |</span><span>연락처 |</span>
+			<c:forEach var="item" items="${output}" varStatus="status">
+				<c:set var="starttime" value="${item.starttime}" />
+				<c:set var="endtime" value="${item.endtime}" />
+				<c:set var="date" value="${item.date}" />
+				<c:set var="membername" value="${item.membername}" />
+				<c:set var="phonenum" value="${item.phonenum}" />
+				<c:set var="studentid" value="${item.studentid}" />
+				<c:set var="peoplenum" value="${item.peoplenum}" />
+				<c:set var="roomNum" value="${item.roomNum}" />
+				<c:set var="purpose" value="${item.purpose}" />
+				<c:set var="calendarNo" value="${item.calendarNo}" />
+				<div class="reservation_info_box">
+					<br> <br>
+					<div class="date_box">신청일 | ${date}</div>
+					<div class="reservation_info_header">신청자 정보</div>
+					<div class="reservation_info_detail">
+						<span>학번 | ${studentid}</span><span>이름 | ${membername}</span><span>연락처
+							| ${phonenum }</span>
+					</div>
+					<br>
+					<div class="reservation_info_header">신청 정보</div>
+					<div class="reservation_info_detail">
+						<span>예약일 | ${date }</span><span>예약호실 | ${roomNum }</span><span>대여
+							시간 | ${starttime} ~ ${endtime}</span><span>대여 목적 | ${purpose}</span><span>사용
+							인원수 | ${peoplenum}</span>
+					</div>
+					<br>
+					<div class="reservation_cancel_btn_box">
+						<a
+							href="${pageContext.request.contextPath}/reservation/reservation_delete.do?calendarNo=${calendarNo}">예약
+							취소</a>
+					</div>
 				</div>
-				<br>
-				<div class="reservation_info_header">신청 정보</div>
-				<div class="reservation_info_detail">
-					<span>학번 |</span><span>이름 |</span><span>연락처 |</span>
-				</div>
-				<br>
-				<div class="reservation_cancel_btn_box">
-					<a href="">예약 취소</a>
-				</div>
-
-			</div>
-
+			</c:forEach>
 		</div>
-
 		<%@ include file="../../include/WEB/footer.jsp"%>
-
-
 	</div>
-
 	<!--모바일 -->
-
-
 	<div class="snu_mobile_box">
 
 		<!-- 모바일 헤더-->
@@ -151,8 +164,39 @@
 			</div>
 
 			<!--모바일 메인 이너-->
-
-			<div></div>
+			<c:forEach var="item" items="${output}" varStatus="status">
+				<c:set var="starttime" value="${item.starttime}" />
+				<c:set var="endtime" value="${item.endtime}" />
+				<c:set var="date" value="${item.date}" />
+				<c:set var="membername" value="${item.membername}" />
+				<c:set var="phonenum" value="${item.phonenum}" />
+				<c:set var="studentid" value="${item.studentid}" />
+				<c:set var="peoplenum" value="${item.peoplenum}" />
+				<c:set var="roomNum" value="${item.roomNum}" />
+				<c:set var="purpose" value="${item.purpose}" />
+				<c:set var="calendarNo" value="${item.calendarNo}" />
+				<div class="reservation_info_box">
+					<br> <br>
+					<div class="date_box">신청일 | ${date}</div>
+					<div class="reservation_info_header">신청자 정보</div>
+					<div class="reservation_info_detail">
+						<span>학번 | ${studentid}</span><span>이름 | ${membername}</span><span>연락처
+							| ${phonenum }</span>
+					</div>
+					<br>
+					<div class="reservation_info_header">신청 정보</div>
+					<div class="reservation_info_detail">
+						<span>예약일 | ${date }</span><span>예약호실 | ${roomNum }</span><span>대여
+							시간 | ${starttime} ~ ${endtime}</span><span>대여 목적 | ${purpose}</span><span>사용
+							인원수 | ${peoplenum}</span>
+					</div>
+					<div class="reservation_cancel_btn_box">
+						<a
+							href="${pageContext.request.contextPath}/reservation/reservation_delete.do?calendarNo=${calendarNo}">예약
+							취소</a>
+					</div>
+				</div>
+			</c:forEach>
 			<!--모바일 메인 이너 끝-->
 
 		</div>

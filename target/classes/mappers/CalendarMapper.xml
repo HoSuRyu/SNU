@@ -5,7 +5,7 @@
 <mapper namespace="CalendarMapper">
 
 	<resultMap id="CalendarMap"
-		type="study.spring.seoulspring.model.Calendar">
+		type="study.spring.seoulspring.model.TimeTable">
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
 		<result property="starttime" column="starttime" />
 		<result property="endtime" column="endtime" />
@@ -13,15 +13,25 @@
 		<result property="date" column="date" />
 		<result property="membername" column="membername" />
 		<result property="calendarNo" column="calendarNo" />
-
+		<result property="studentid" column="studentid" />
+		<result property="purpose" column="purpose" />
 	</resultMap>
-	
+
 	<select id="selectlist"
-		parameterType="study.spring.seoulspring.model.Calendar"
+		parameterType="study.spring.seoulspring.model.TimeTable"
 		resultMap="CalendarMap">
-		SELECT * FROM snu.roomTimeTable order by calendarNo DESC
+		SELECT * FROM snu.roomTimeTable
+		<if test="studentid != null">
+			WHERE studentid =#{studentid}
+		</if>
+		<if test="calendarNo > 0">
+			AND calendarNo =#{calendarNo}
+		</if>
+		order by date DESC
 		<if test="listCount > 0">
-		LIMIT #{offset},#{listCount}
+			LIMIT #{offset},#{listCount}
 		</if>
 	</select>
+
+
 </mapper>

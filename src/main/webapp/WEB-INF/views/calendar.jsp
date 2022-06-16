@@ -16,6 +16,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta NAME="ROBOTS" CONTENT="NOINDEX,NOFOLLOW">
 <title>제41대 사범대학 학생회 늘품</title>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
@@ -67,19 +68,22 @@ select {
 	font-weight: bold;
 	text-align: center;
 }
-.reserveCheck{
-	display:flex;
+
+.reserveCheck {
+	display: flex;
 	justify-content: right;
 	margin-bottom: 10px;
 }
-.checkbox{
+
+.checkbox {
 	border: 1px solid black;
-	padding : 7px;
+	padding: 7px;
 	border-radius: 5px;
 	margin-right: 10px;
-	background-color:#0f0f70;
+	background-color: #0f0f70;
 	color: white;
 }
+
 .sat {
 	color: #529dbc;
 }
@@ -296,8 +300,16 @@ form {
 				</span>
 			</div>
 			<div class="reserveCheck">
-			<a href="${pageContext.request.contextPath}/conform.do"><div class="checkbox">예약 현황 보기</div></a>
-			<a href="#"><div class="checkbox">나의 예약 보기</div></a>
+
+				<c:if test="${member !=null }">
+					<c:if test="${member.name eq '관리자' }">
+						<a href="${pageContext.request.contextPath}/conform.do"><div
+								class="checkbox">예약 현황 보기</div></a>
+					</c:if>
+				</c:if>
+				<a
+					href="${pageContext.request.contextPath}/reservation/info.do?studentid=${member.studentid}"><div
+						class="checkbox">나의 예약 보기</div></a>
 			</div>
 			<form name="calendarFrm" id="calendarFrm" action="" method="GET">
 				<c:set var="month" value="${today_info.search_month}" />
@@ -531,7 +543,18 @@ form {
 		<%@ include file="../include/MOBILE/header.jsp"%>
 		<%@ include file="../include/MOBILE/tab.jsp"%>
 		<!--모바일 컨텐츠 박스-->
+		<div class="reserveCheck">
 
+			<c:if test="${member !=null }">
+				<c:if test="${member.name eq '관리자' }">
+					<a href="${pageContext.request.contextPath}/conform.do"><div
+							class="checkbox">예약 현황 보기</div></a>
+				</c:if>
+			</c:if>
+			<a
+				href="${pageContext.request.contextPath}/reservation/info.do?studentid=${member.studentid}"><div
+					class="checkbox">나의 예약 보기</div></a>
+		</div>
 		<form name="calendarFrm" id="calendarFrm" action="" method="GET">
 			<c:set var="month" value="${today_info.search_month}" />
 			<c:if test="${today_info.search_month<10}">

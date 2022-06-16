@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.seoulspring.helper.WebHelper;
+import study.spring.seoulspring.model.Community;
 import study.spring.seoulspring.model.DateData;
 import study.spring.seoulspring.model.Reservation;
+import study.spring.seoulspring.model.TimeTable;
 import study.spring.seoulspring.service.CalendarService;
 import study.spring.seoulspring.service.DepartmentService;
 import study.spring.seoulspring.service.ReservationService;
@@ -45,14 +49,42 @@ public class CalendarController {
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
 
+	@RequestMapping(value = "reservation/reservation_delete.do", method = RequestMethod.GET)
+	public ModelAndView post_delete(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("calendarNo") int calendarNo) {
+		Reservation input = new Reservation();
+		input.setCalendarNo(calendarNo);
+		int result = 0;
+		try {
+			result = reservationService.DeleteReservation(input);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String message = " ";
+		if(result ==0 ) 
+		{
+			message = "예약 취소 실패!";
+		}
+		else {
+			message ="예약이 취소되었습니다.";
+		}
+		String redirectUrl = this.contextPath + "/calendar.do";
+		response.setHeader("Content-Type", "text/html;charset=utf-8");
+		return this.webHelper.redirect(redirectUrl,message);
+	}
+
 	@RequestMapping(value = { "/reservation/reservation_insert.do" }, method = RequestMethod.GET)
 	@ResponseBody
-	public void reservation_insert(Locale locale, Model model, HttpServletRequest request, HttpSession session,
+	public int reservation_insert(Locale locale, Model model, HttpServletRequest request, HttpSession session,
 			@RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
 			@RequestParam("student_name") String student_name, @RequestParam("student_phNum") String student_phNum,
 			@RequestParam("student_id") int student_id, @RequestParam("people_num") int people_num,
-			@RequestParam("roomNum") int roomNum, @RequestParam("date") String date) {
+			@RequestParam("roomNum") int roomNum, @RequestParam("date") String date,
+			@RequestParam("purpose") String purpose,@RequestParam("timeCount") int timeCount) {
 
+		double time = timeCount/2;
 		Reservation input = new Reservation();
 		input.setStarttime(start_time);
 		input.setEndtime(end_time);
@@ -62,25 +94,62 @@ public class CalendarController {
 		input.setPeoplenum(people_num);
 		input.setDate(date);
 		input.setRoomNum(roomNum);
+		input.setPurpose(purpose);
+		input.setTimeCount(time);
 		input.setDate(request.getParameter("date"));
 
-		int result = 0;
+		
+		Reservation input2= new Reservation();
+		input2.setStudentid(student_id);
+		input2.setDate(date);
+		input2.setRoomNum(roomNum);
+		
+		double result = 0;
 		try {
-			result = reservationService.insertTime(input);
-		} catch (Exception e) {
+			result =reservationService.TimeSum(input2);
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		if(result+time > 4) 
+		{
+			return 1;
+		}
+		else {
+			try {
+				result = reservationService.insertTime(input);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}
+		
 
 	}
 
 	@RequestMapping(value = { "/reservation/info.do" }, method = RequestMethod.GET)
-	public String reservationinfo(Model model) {
+	public String reservationinfo(Model model, HttpServletRequest request, Locale locale,
+			@RequestParam("studentid") String studentid,
+			@RequestParam(value = "calendarNo", defaultValue = "0") int calendarNo) {
+
+		List<TimeTable> output = null;
+		TimeTable input = new TimeTable();
+		input.setStudentid(studentid);
+		if (calendarNo > 0) {
+			input.setCalendarNo(calendarNo);
+		}
+		try {
+			output = calendarService.selectList(input);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("output", output);
 		return "reservation/info";
 	}
 
 	@RequestMapping(value = { "/reservation.do" }, method = RequestMethod.POST)
-
 	public String reservation(Model model, @RequestParam("reserve_date") String date,
 			@RequestParam("room_num") int room_num) {
 
@@ -90,7 +159,6 @@ public class CalendarController {
 		model.addAttribute("month", month);
 		model.addAttribute("day", day);
 		model.addAttribute("room_num", room_num);
-
 		Reservation input = new Reservation();
 		input.setDate(date);
 		input.setRoomNum(room_num);
@@ -109,9 +177,11 @@ public class CalendarController {
 
 	@RequestMapping(value = "/conform.do", method = RequestMethod.GET)
 	public String conform(Model model, HttpServletRequest request, Locale locale) {
-		List<study.spring.seoulspring.model.Calendar> calendar = new ArrayList<study.spring.seoulspring.model.Calendar>();
+		List<TimeTable> calendar = null;
+		TimeTable input = new TimeTable();
+
 		try {
-			calendar = calendarService.selectList();
+			calendar = calendarService.selectList(input);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -122,7 +192,6 @@ public class CalendarController {
 
 	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, DateData dateData, Locale locale) {
-
 		Calendar cal = Calendar.getInstance();
 		int today_year = cal.get(Calendar.YEAR);
 		int today_month = cal.get(Calendar.MONTH) + 1;
@@ -140,10 +209,8 @@ public class CalendarController {
 					String.valueOf(cal.get(Calendar.DATE)), null);
 		}
 		// 검색 날짜 end
-
 		Map<String, Integer> today_info = dateData.today_info(dateData);
 		List<DateData> dateList = new ArrayList<DateData>();
-
 		// 실질적인 달력 데이터 리스트에 데이터 삽입 시작.
 		// 일단 시작 인덱스까지 아무것도 없는 데이터 삽입
 		for (int i = 1; i < today_info.get("start"); i++) {

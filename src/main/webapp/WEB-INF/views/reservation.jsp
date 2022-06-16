@@ -15,6 +15,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta NAME="ROBOTS"CONTENT="NOINDEX,NOFOLLOW">
 <title>제41대 사범대학 학생회 늘품(조홍식)(류호수)</title>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/assets/img/basic_logo.png" />
@@ -326,11 +327,11 @@ input:focus {
 						type="hidden" name="start_time" id="start_time" value="" /> <input
 						type="hidden" name="end_time" id="end_time" value="" /> <br>
 
-					<label for="rent_objective">공실 대여 목적</label> 
-					<input type="text" id="rent_objective" name="rent_objective" /> <br> 
+					<label for="purpose">공실 대여 목적</label> 
+					<input type="text" id="purpose" name="purpose" /> <br> 
 					<label for="people_num">사용 인원수</label> <input type="text" id="people_num" name="people_num" value="" /> <br> 
 					<label for="student_name">대표 예약자 성함</label> <input type="text" id="student_name" name="student_name" disabled value="${member.name }" /> <br> 
-					<label for="student_id">대표 예약자 학번</label> <input type="text" id="student_id" name="student_id" value="" /> <br> 
+					<label for="student_id">대표 예약자 학번</label> <input type="text" id="student_id" name="student_id" disabled value="${member.studentid }" /> <br> 
 					<label for="student_phNum">대표 예약자 연락처</label> <input type="text" id="student_phNum" name="student_phNum" /> 
 					<input type="hidden" id="date" name="date" value="${date}" />
 					<input type="hidden" name="roomNum" id="roomNum" value=${room_num } />
@@ -444,7 +445,17 @@ input:focus {
 					$(".time_table_button").attr("disabled", false);
 					$(".disabled").attr("disabled", true);
 					click_count = 0;
+					console.log("last: "+last);
+					console.log("first: "+first);
+					
+
+					console.log(last-fisrt);
 					return;
+				}
+				else{
+					console.log("last: "+last);
+					console.log("first: "+first);
+					console.log("last - first:"+ (last-first));
 				}
 
 				for (var i = first; i <= last; i++) {
@@ -519,6 +530,8 @@ input:focus {
 							var people_num = $("#people_num").val();
 							var date = $("#date").val();
 							var roomNum = $("#roomNum").val();
+							var purpose = $("#purpose").val();
+							var timeCount =last-first + 1 ;
 							e.preventDefault();
 							var formData = new FormData(this);
 							if (!regex.value('#start_time', '시작시간을 입력하세요')) {
@@ -542,10 +555,20 @@ input:focus {
 												+ "&people_num="
 												+ people_num
 												+ "&date=" + date
-												+ "&roomNum="+roomNum,
+												+ "&roomNum="+roomNum
+												+ "&purpose="+purpose
+												+ "&timeCount="+timeCount
+												,
 
-										success : function() {
-											alert("공실 예약이 완료 되었습니다!!");
+										success : function(data) {
+											if(data ==1)
+											{
+												alert("예약에 실패하였습니다. 1일 예약 가능시간은 최대 4시간입니다.");
+											}
+											else
+											{
+												alert("공실 예약이 완료 되었습니다!!");
+											}
 											location.reload();
 
 										},

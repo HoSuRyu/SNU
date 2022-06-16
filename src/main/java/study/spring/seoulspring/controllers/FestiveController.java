@@ -254,8 +254,28 @@ public class FestiveController {
 		}
 		input.setImg(img_thumbnail);
 		// 썸네일 파일
+		
+
 
 		int result = 0;
+		
+
+		try {
+			result = festiveService.insertFestive(input);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Festive output1 = null;
+		try {
+			output1 = festiveService.selectOne();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		int count = 0;
 		for (MultipartFile mf : fileList) {
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -273,7 +293,7 @@ public class FestiveController {
 				img_name = originFileName + System.currentTimeMillis();
 
 				img.setImg(img_name);
-				img.setFestiveno(festiveno);
+				img.setFestiveno(output1.getFestiveno());
 				input1.add(img);
 				try {
 					mf.transferTo(new File(safeFile));
@@ -300,13 +320,6 @@ public class FestiveController {
 
 		}
 
-		try {
-			result = festiveService.insertFestive(input);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		return this.webHelper.redirect(redirectUrl, null);
 

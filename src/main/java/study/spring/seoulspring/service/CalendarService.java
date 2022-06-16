@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import study.spring.seoulspring.model.Calendar;
+import study.spring.seoulspring.model.TimeTable;
 
 @Service
 public interface CalendarService {
 	
-	public abstract List<Calendar> selectList() throws Exception; 
+	public abstract List<TimeTable> selectList(TimeTable input) throws Exception; 
 
 }
